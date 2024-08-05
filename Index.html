@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Detailed Itinerary Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <style>
+        #map { height: 100vh; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        var map = L.map('map').setView([20.7984, -156.3319], 5);
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        
+        var markers = L.markerClusterGroup();
+        
+        var itineraryPoints = [
+            {"location": "Italia", "coords": [41.8719, 12.5674], "date": "09/08/2024", "description": "Partenza dall'Italia"},
+            {"location": "Monaco", "coords": [43.7384, 7.4246], "date": "09/08/2024", "description": "Scalo a Monaco"},
+            {"location": "San Francisco", "coords": [37.7749, -122.4194], "date": "09/08/2024", "description": "Scalo a San Francisco"},
+            {"location": "Kahului Airport, Maui", "coords": [20.8986, -156.4305], "date": "09/08/2024", "description": "Arrivo ore 19:00"},
+            {"location": "Napili Kai Beach Resort, Maui", "coords": [20.9985, -156.6654], "date": "10/08/2024", "description": "Itinerario ad anello costa ovest"},
+            {"location": "Pipiwai Trail, Maui", "coords": [20.6545, -156.0485], "date": "11/08/2024", "description": "Road to Hana - Pipiwai trail"},
+            {"location": "Haleakalā National Park, Maui", "coords": [20.7204, -156.1552], "date": "12/08/2024", "description": "Haleakalā National Park"},
+            {"location": "Sheraton Kona Resort, Big Island", "coords": [19.5938, -155.9707], "date": "13/08/2024", "description": "Arrivo e relax in spiaggia"},
+            {"location": "Waipio Valley Lookout, Big Island", "coords": [20.1184, -155.5911], "date": "14/08/2024", "description": "Waipio Valley Lookout"},
+            {"location": "Mauna Kea, Big Island", "coords": [20.0750, -155.4720], "date": "15/08/2024", "description": "Mauna Kea, Akaka Falls"},
+            {"location": "Hawaii Volcanoes National Park, Big Island", "coords": [19.4194, -155.2885], "date": "16/08/2024", "description": "Hawaii Volcanoes National Park"},
+            {"location": "Lihue Airport, Kauai", "coords": [21.9750, -159.3380], "date": "17/08/2024", "description": "Sorvolo di Kauai in elicottero"},
+            {"location": "Waimea Canyon, Kauai", "coords": [22.0456, -159.6637], "date": "18/08/2024", "description": "Waimea Canyon"},
+            {"location": "Kalalau Trail, Kauai", "coords": [22.2200, -159.5836], "date": "19/08/2024", "description": "Kalalau Trail"},
+            {"location": "Poipu Beach, Kauai", "coords": [21.8756, -159.4596], "date": "20/08/2024", "description": "Poipu Beach, Brennecke's Beach"},
+            {"location": "Pearl Harbour, Oahu", "coords": [21.3676, -157.9390], "date": "21/08/2024", "description": "Visita Pearl Harbour"},
+            {"location": "Lanikai Beach, Oahu", "coords": [21.3934, -157.7164], "date": "22/08/2024", "description": "Lanikai beach, Waikiki beach"},
+            {"location": "North Shore, Oahu", "coords": [21.6386, -158.0630], "date": "23/08/2024", "description": "Spiagge costa nord-orientale"},
+            {"location": "San Francisco", "coords": [37.7749, -122.4194], "date": "24/08/2024", "description": "Scalo a San Francisco"},
+            {"location": "Italia", "coords": [41.8719, 12.5674], "date": "24/08/2024", "description": "Ritorno in Italia"}
+        ];
+
+        for (var i = 0; i < itineraryPoints.length; i++) {
+            var point = itineraryPoints[i];
+            var marker = L.marker(point.coords)
+                .bindPopup(point.location + " - " + point.date + " (" + point.description + ")");
+            markers.addLayer(marker);
+        }
+        
+        map.addLayer(markers);
+    </script>
+</body>
+</html>
